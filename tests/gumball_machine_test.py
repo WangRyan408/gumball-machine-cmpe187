@@ -121,3 +121,29 @@ class TestCoinInsertion(TestGumballMachine):
         self.assertEqual(self.machine.getBalance(), 0)
 
         
+class TestGumballDispensing(TestGumballMachine):
+    """Test cases for gumball dispensing functionality."""
+
+    def test_dispense_red_gumball_with_exact_balance(self):
+        """
+        Test Case 11: Dispense RED gumball with exact balance
+        Reason: Verify machine dispenses a RED gumball and updates balance correctly
+        Input: insertCoin('NICKEL'), dispenseGumball('RED')
+        Expected Output: return True, balance = 0 cents
+        """
+        self.machine.insertCoin('NICKEL')
+        result = self.machine.dispenseGumball('RED')
+        self.assertTrue(result)
+        self.assertEqual(self.machine.getBalance(), 0)
+
+    def test_dispense_yellow_gumball_with_exact_balance(self):
+        """
+        Test Case 12: Dispense YELLOW gumball with exact balance
+        Reason: Verify machine dispenses a YELLOW gumball and updates balance correctly
+        Input: insertCoin('DIME'), dispenseGumball('YELLOW')
+        Expected Output: return True, balance = 0 cents
+        """
+        self.machine.insertCoin('DIME')
+        result = self.machine.dispenseGumball('YELLOW')
+        self.assertTrue(result)
+        self.assertEqual(self.machine.getBalance(), 0)
