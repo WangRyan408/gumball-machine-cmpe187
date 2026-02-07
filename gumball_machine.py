@@ -1,16 +1,31 @@
+# Dictionary defining gumball types and their prices in cents
 GUMBALLS = {
     'RED': 5,    # Red gumballs cost 5 cents (nickel)
     'YELLOW': 10  # Yellow gumballs cost 10 cents (dime)
 }
 
+"""
+    A vending machine that dispenses red and yellow gumballs.
+    The machine accepts nickels (5 cents), dimes (10 cents), and quarters (25 cents).
+    Red gumballs cost 5 cents and yellow gumballs cost 10 cents.
+    The machine tracks the customer's balance and returns change upon request.
+    The machine provides a simple command-line interface for interaction.
+"""
+
 class GumballMachine:
+    #Initializes the gumball machine with a balance of 0 cents.
     def __init__(self):
-        self.balance = 0  # Current balance in cents
+        self.balance = 0  # Current balance in cents customer inserted
         
-    def insertCoin(self, coin_type: str) -> bool:
-        """Insert a coin and update balance. Returns True if valid coin."""
+
+        
+        #Insert a coin into the machine and update the balance.
+        #Args: coin_type: String representing the coin type ('NICKEL', 'DIME', or 'QUARTER')
+        #Returns: bool: True if the coin was valid and accepted, False if invalid and returned
+    def insertCoin(self, coin_type: str) -> bool: 
         coin_type = coin_type.upper()
-        
+
+        # Check coin type and add appropriate value to balance
         if coin_type == 'NICKEL':
             self.balance += 5
             print(f"Nickel accepted. Current balance: {self.balance} cents")
@@ -24,19 +39,19 @@ class GumballMachine:
             print(f"Quarter accepted. Current balance: {self.balance} cents")
             return True
         else:
+            # Invalid coins are rejected and returned to customer
             print(f"Invalid coin '{coin_type}' returned.")
             return False
     
+
+
+        #Dispense a gumball of specified color and update the balance.
+        #Args: color: String representing the gumball color ('RED' or 'YELLOW')
+        #Returns: bool: True if the gumball was successfully dispensed, False if not
     def dispenseGumball(self, color: str) -> bool:
         """Dispense a gumball of specified color. Returns True if successful."""
         color = color.upper()
-        
-        if color not in GUMBALLS:
-            print(f"Invalid gumball color: {color}")
-            return False
-        
         cost = GUMBALLS[color]
-        
         if self.balance >= cost:
             self.balance -= cost
             print(f"{color} gumball dispensed! Remaining balance: {self.balance} cents")
@@ -45,6 +60,7 @@ class GumballMachine:
             print(f"Insufficient funds. {color} gumball costs {cost} cents, you have {self.balance} cents.")
             return False
     
+
     def returnChange(self) -> int:
         """Return all remaining balance to customer."""
         change = self.balance
@@ -61,13 +77,24 @@ class GumballMachine:
 
 
 def main():
+    """
+    Main function that runs the interactive gumball vending machine interface.
+    
+    Provides a menu-driven interface allowing users to:
+    - Insert coins
+    - Dispense gumballs
+    - Check balance
+    - Return change
+    - Exit the program
+    """
+    # Create a new gumball machine instance
     machine = GumballMachine()
     print("Welcome to the Gumball Vending Machine!")
     print("RED gumballs cost 5 cents (nickel)")
     print("YELLOW gumballs cost 10 cents (dime)")
     print("Valid coins: NICKEL, DIME, QUARTER")
 
-    
+     # Main interaction loop - continues until user chooses to exit
     while True:
         print("\nOptions:")
         print("1. Insert coin")
