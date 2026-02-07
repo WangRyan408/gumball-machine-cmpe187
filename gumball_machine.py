@@ -22,8 +22,11 @@ class GumballMachine:
         #Insert a coin into the machine and update the balance.
         #Args: coin_type: String representing the coin type ('NICKEL', 'DIME', or 'QUARTER')
         #Returns: bool: True if the coin was valid and accepted, False if invalid and returned
-    def insertCoin(self, coin_type: str) -> bool: 
-        coin_type = coin_type.upper()
+    def insertCoin(self, coin_type: str) -> bool:
+        if not isinstance(coin_type, str):
+            print("Invalid input. Please insert a valid coin.")
+            return False
+        coin_type = coin_type.strip().upper()
 
         # Check coin type and add appropriate value to balance
         if coin_type == 'NICKEL':
@@ -50,7 +53,13 @@ class GumballMachine:
         #Returns: bool: True if the gumball was successfully dispensed, False if not
     def dispenseGumball(self, color: str) -> bool:
         """Dispense a gumball of specified color. Returns True if successful."""
-        color = color.upper()
+        if not isinstance(color, str):
+            print("Invalid input. Please select a valid gumball color.")
+            return False
+        color = color.strip().upper()
+        if color not in GUMBALLS:
+            print(f"Invalid color '{color}'. Available colors: {', '.join(GUMBALLS.keys())}")
+            return False
         cost = GUMBALLS[color]
         if self.balance >= cost:
             self.balance -= cost
