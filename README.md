@@ -1,15 +1,20 @@
-# Gumball Machine 🧋
+# Gumball Vending Machine
 
-**Quick, minimal project** that models a gumball vending machine and includes unit tests.
+**M 03:** Efe Gur, Nebonid Serian, Kanan Ibadzade, Nam Nguyen, Ryan Wang
+
+A simple Python project that models a gumball vending machine and includes unit tests.
 
 ---
 
-## Features ✅
+## Features
+- Insert valid coins (nickel, dime, quarter)
+- Dispense red and yellow gumballs
+- Track balance and return change
+- Unit tests using Python’s built-in `unittest` framework
+  
+---
 
-- Simple implementation of a gumball machine (insert coin, turn crank, dispense) 🔧
-- Unit tests with `pytest` to validate behavior
-
-## Getting started 💡
+## Getting started
 
 1. Clone the repo
 
@@ -23,7 +28,7 @@
    pip install -U pip
    pip install pytest
 
-## Running tests 🔍
+## Running tests
 
 Run the test suite with:
 
@@ -36,11 +41,3 @@ Run the test suite with:
 - `README.md` — this file
 
 ---
-
-## Contributing
-
-Small fixes and test improvements are welcome. Please open a PR with a brief description.
-
-## License
-
-MIT — see repository for full license text.
