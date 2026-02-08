@@ -1,34 +1,23 @@
-# Dictionary defining gumball types and their prices in cents
+# Gumball prices in cents
 GUMBALLS = {
-    'RED': 5,    # Red gumballs cost 5 cents (nickel)
-    'YELLOW': 10  # Yellow gumballs cost 10 cents (dime)
+    'RED': 5,
+    'YELLOW': 10
 }
 
-"""
-    A vending machine that dispenses red and yellow gumballs.
-    The machine accepts nickels (5 cents), dimes (10 cents), and quarters (25 cents).
-    Red gumballs cost 5 cents and yellow gumballs cost 10 cents.
-    The machine tracks the customer's balance and returns change upon request.
-    The machine provides a simple command-line interface for interaction.
-"""
-
 class GumballMachine:
-    #Initializes the gumball machine with a balance of 0 cents.
+    """Simple gumball vending machine that accepts nickels, dimes, and quarters."""
+    
     def __init__(self):
-        self.balance = 0  # Current balance in cents customer inserted
-        
-
-        
-        #Insert a coin into the machine and update the balance.
-        #Args: coin_type: String representing the coin type ('NICKEL', 'DIME', or 'QUARTER')
-        #Returns: bool: True if the coin was valid and accepted, False if invalid and returned
+        self.balance = 0
+    
     def insertCoin(self, coin_type: str) -> bool:
+        """Add a coin to the machine. Returns True if accepted."""
         if not isinstance(coin_type, str):
             print("Invalid input. Please insert a valid coin.")
             return False
+        
         coin_type = coin_type.strip().upper()
 
-        # Check coin type and add appropriate value to balance
         if coin_type == 'NICKEL':
             self.balance += 5
             print(f"Nickel accepted. Current balance: {self.balance} cents")
@@ -42,24 +31,21 @@ class GumballMachine:
             print(f"Quarter accepted. Current balance: {self.balance} cents")
             return True
         else:
-            # Invalid coins are rejected and returned to customer
             print(f"Invalid coin '{coin_type}' returned.")
             return False
-    
 
-
-        #Dispense a gumball of specified color and update the balance.
-        #Args: color: String representing the gumball color ('RED' or 'YELLOW')
-        #Returns: bool: True if the gumball was successfully dispensed, False if not
     def dispenseGumball(self, color: str) -> bool:
-        """Dispense a gumball of specified color. Returns True if successful."""
+        """Try to dispense a gumball. Returns True if successful."""
         if not isinstance(color, str):
             print("Invalid input. Please select a valid gumball color.")
             return False
+        
         color = color.strip().upper()
+        
         if color not in GUMBALLS:
             print(f"Invalid color '{color}'. Available colors: {', '.join(GUMBALLS.keys())}")
             return False
+        
         cost = GUMBALLS[color]
         if self.balance >= cost:
             self.balance -= cost
@@ -68,10 +54,9 @@ class GumballMachine:
         else:
             print(f"Insufficient funds. {color} gumball costs {cost} cents, you have {self.balance} cents.")
             return False
-    
 
     def returnChange(self) -> int:
-        """Return all remaining balance to customer."""
+        """Give back any remaining balance."""
         change = self.balance
         if change > 0:
             print(f"Returning {change} cents in change.")
@@ -81,29 +66,16 @@ class GumballMachine:
         return change
     
     def getBalance(self) -> int:
-        """Return current balance."""
         return self.balance
 
 
 def main():
-    """
-    Main function that runs the interactive gumball vending machine interface.
-    
-    Provides a menu-driven interface allowing users to:
-    - Insert coins
-    - Dispense gumballs
-    - Check balance
-    - Return change
-    - Exit the program
-    """
-    # Create a new gumball machine instance
     machine = GumballMachine()
     print("Welcome to the Gumball Vending Machine!")
     print("RED gumballs cost 5 cents (nickel)")
     print("YELLOW gumballs cost 10 cents (dime)")
     print("Valid coins: NICKEL, DIME, QUARTER")
 
-     # Main interaction loop - continues until user chooses to exit
     while True:
         print("\nOptions:")
         print("1. Insert coin")
@@ -118,19 +90,14 @@ def main():
         if choice == '1':
             coin = input("Enter coin type (NICKEL/DIME/QUARTER): ").strip()
             machine.insertCoin(coin)
-            
         elif choice == '2':
             machine.dispenseGumball('RED')
-            
         elif choice == '3':
             machine.dispenseGumball('YELLOW')
-            
         elif choice == '4':
             machine.returnChange()
-            
         elif choice == '5':
             print(f"Current balance: {machine.getBalance()} cents")
-            
         elif choice == '6':
             if machine.getBalance() > 0:
                 print(f"\nYou still have {machine.getBalance()} cents in the machine.")
@@ -139,9 +106,8 @@ def main():
                     machine.returnChange()
             print("\nThank you for using the Gumball Vending Machine!")
             break
-            
         else:
-            print("Invalid choice. Please enter 1-6.")
+            print("Invalid choice. `lease enter 1-6.")
 
 
 if __name__ == "__main__":
